@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'API',
     'rest_framework',
     'drf_yasg',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'conf.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ]
+}
+
 
 TEMPLATES = [
     {
