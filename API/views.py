@@ -219,6 +219,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
+from rest_framework.permissions import IsAuthenticated
 
 
 class RegisterView(APIView):
@@ -253,5 +254,16 @@ class LoginView(APIView):
 
 
     
+
+class Logout(APIView):
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response({"message": "Logut buldi"}, status=status.HTTP_200_OK)
+        except Exception:
+            return Response({"error": "token mavjud emas"}, status=status.HTTP_400_BAD_REQUEST)
 
 
